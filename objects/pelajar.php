@@ -1,6 +1,7 @@
 <?php
-class Pelajar{
+class Pelajar {
  
+    //Reference API: https://www.codeofaninja.com/2017/02/create-simple-rest-api-in-php.html    
     // database connection and table name
     private $conn;
     private $table_name = "maklumat_pelajar";
