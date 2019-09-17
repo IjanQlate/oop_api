@@ -155,7 +155,6 @@ class Pelajar {
         
     }
 
-
     // used when filling up the update pelajar form
     function readOne(){
     
@@ -306,7 +305,6 @@ class Pelajar {
         return false;
     }
 
-
     // delete pelajar
     function delete(){
     
@@ -331,7 +329,36 @@ class Pelajar {
         
     }
 
-
+    // search products
+    function search($keywords){
+    
+        // select all query
+        $query = "SELECT
+                    *
+                FROM
+                    " . $this->table_name . " p
+                WHERE
+                    p.sekolah_asal LIKE ? OR p.nama_murid LIKE ? OR p.nokad_pengenalan LIKE ?
+                ORDER BY
+                    p.id DESC";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // sanitize
+        $keywords=htmlspecialchars(strip_tags($keywords));
+        $keywords = "%{$keywords}%";
+    
+        // bind
+        $stmt->bindParam(1, $keywords);
+        $stmt->bindParam(2, $keywords);
+        $stmt->bindParam(3, $keywords);
+    
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
+    }
 
 
 }
